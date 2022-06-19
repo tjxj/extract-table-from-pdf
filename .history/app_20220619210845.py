@@ -2,10 +2,14 @@
 
 import pandas as pd 
 import streamlit as st
-import base64
+from pdfminer.high_level import extract_pages
+import base64,tempfile
+from pathlib import Path
+import pdfplumber
 import subprocess # process in the os
-from subprocess import STDOUT #os process manipuation
+from subprocess import STDOUT, check_call #os process manipuation
 import os #os process manipuation
+import base64 # byte object into a pdf file 
 import camelot as cam # extracting tables from PDFs 
 
 # to run this only once and it's cached
@@ -40,4 +44,10 @@ if input_pdf is not None:
     #     table.to_excel(result, sheetname,index=False) 
 
     with open('result.xlsx','rb') as f:
-       st.download_button('提取完成，点击下载！', f,file_name='result.xlsx',mime="application/vnd.ms-excel")
+       st.download_button('download', f,file_name='result.xlsx',mime="application/vnd.ms-excel")
+       
+
+## https://www.adobe.com/acrobat/online/compress-pdf.html?mv=search&sdid=DZTGZX2P&ef_id=CjwKCAiAjoeRBhAJEiwAYY3nDARHYPn2H7Cs1ZrGfMDx01ikownQ-DYhp0EX_mKnwWtC6TyrWP3tjBoCG_QQAvD_BwE:G:s&s_kwcid=AL!3085!3!559402382057!e!!g!!pdf%20compress!12981897010!121481297003&cmpn=mobile-search&gclid=CjwKCAiAjoeRBhAJEiwAYY3nDARHYPn2H7Cs1ZrGfMDx01ikownQ-DYhp0EX_mKnwWtC6TyrWP3tjBoCG_QQAvD_BwE
+## https://github.com/insightsbees/Personal_Website/blob/main/website_app.py
+
+## https://choodesmond42.medium.com/pdf-manipulation-how-to-remove-unwanted-pages-using-pdfminer-56ba93bdd7d1

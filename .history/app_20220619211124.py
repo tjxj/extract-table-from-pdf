@@ -2,10 +2,14 @@
 
 import pandas as pd 
 import streamlit as st
-import base64
+from pdfminer.high_level import extract_pages
+import base64,tempfile
+from pathlib import Path
+import pdfplumber
 import subprocess # process in the os
-from subprocess import STDOUT #os process manipuation
+from subprocess import STDOUT, check_call #os process manipuation
 import os #os process manipuation
+import base64 # byte object into a pdf file 
 import camelot as cam # extracting tables from PDFs 
 
 # to run this only once and it's cached
