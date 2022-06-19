@@ -1,0 +1,15 @@
+torch
+transformers
+tqdm
+sacremoses
+sacrebleu
+sentencepiece
+fastBPE
+scipy
+scikit-learn
+mosestokenizer
+nltk
+pyyaml
+numpy==1.19.2
+more-itertools
+tabulate
