@@ -3,6 +3,8 @@ import os,subprocess,base64
 from subprocess import STDOUT #os process manipuation
 os.system("apt install ghostscript python3-tk")
 import streamlit as st
+
+
 @st.cache
 def gh():
     """install ghostscript on the linux machine"""

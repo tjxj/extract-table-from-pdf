@@ -2,7 +2,8 @@
 import os,subprocess,base64
 from subprocess import STDOUT #os process manipuation
 os.system("apt install ghostscript python3-tk")
-import streamlit as st
+
+
 @st.cache
 def gh():
     """install ghostscript on the linux machine"""
@@ -11,6 +12,7 @@ def gh():
     proc.wait()
 gh()
 import pandas as pd 
+import streamlit as st
 import camelot as cam # extracting tables from PDFs 
 
 st.title("PDF Table Extractor")
