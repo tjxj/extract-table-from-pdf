@@ -6,6 +6,7 @@ import base64
 import subprocess # process in the os
 from subprocess import STDOUT #os process manipuation
 import os
+import camelot as cam # extracting tables from PDFs 
 
 @st.cache
 def gh():
@@ -14,10 +15,9 @@ def gh():
     proc = subprocess.Popen('apt-get update && apt-get install -y python3-opencv', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
     proc = subprocess.Popen('apt-get update && apt-get install libgl1', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
     proc.wait()
+
+
 gh()
-
-import camelot as cam # extracting tables from PDFs 
-
 st.title("PDF Table Extractor")
 
 input_pdf = st.file_uploader(label = "", type = 'pdf')
