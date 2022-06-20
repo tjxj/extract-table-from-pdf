@@ -4,4 +4,4 @@ xlsxwriter
 pandas
 streamlit
 ghostscript==0.7
-opencv-python
+opencv-python-headless

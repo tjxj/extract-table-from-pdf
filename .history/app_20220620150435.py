@@ -11,7 +11,7 @@ import os
 def gh():
     """install ghostscript on the linux machine"""
     proc = subprocess.Popen('apt-get install -y ghostscript', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
-    proc = subprocess.Popen('apt-get install -y libgl1-mesa-dev', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
+    #proc = subprocess.Popen('apt-get update && apt-get install libgl1', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
     proc.wait()
 gh()
 
