@@ -5,9 +5,11 @@ import streamlit as st
 import base64
 import subprocess # process in the os
 from subprocess import STDOUT #os process manipuation
-import os
+import os ,sys
 import camelot as cam # extracting tables from PDFs 
 
+sys(apt-get install -y ghostscript)
+# to run this only once and it's cached
 @st.cache
 def gh():
     """install ghostscript on the linux machine"""
@@ -15,6 +17,7 @@ def gh():
     proc.wait()
 
 gh()
+
 st.title("PDF Table Extractor")
 
 input_pdf = st.file_uploader(label = "", type = 'pdf')
