@@ -6,7 +6,7 @@ import base64
 import subprocess # process in the os
 from subprocess import STDOUT #os process manipuation
 import os
-#os.system("apt install ghostscript python3-tk")
+os.system("apt install ghostscript python3-tk")
 
 @st.cache
 def gh():
