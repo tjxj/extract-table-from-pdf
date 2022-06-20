@@ -39,7 +39,7 @@ if input_pdf is not None:
        st.download_button('提取完成，点击下载！', f,file_name='result.xlsx',mime="application/vnd.ms-excel")
        
        
-# apt-get update
-# apt-get install sudo
-# sudo apt update
-# sudo apt install libgl1-mesa-glx
+apt-get update
+apt-get install sudo
+sudo apt update
+sudo apt install libgl1-mesa-glx
