@@ -10,7 +10,9 @@ import streamlit as st
 import base64
 from pathlib import Path
 import tempfile
-
+import os
+#os.system("apt install ghostscript python3-tk")
+##
 
 def show_pdf(file):
     with open(file,"wb") as f:
@@ -68,7 +70,7 @@ def gh():
     proc = subprocess.Popen('apt-get install -y ghostscript', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
     proc.wait()
 
-gh()
+#gh()
 
 
 
