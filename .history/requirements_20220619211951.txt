@@ -1,7 +1,5 @@
-ghostscript==0.7
 camelot-py
 pdfplumber==0.7.1
 xlsxwriter
 pandas
 streamlit
-opencv-python

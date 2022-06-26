@@ -8,25 +8,9 @@ os.system("apt-get install -y libgl1-mesa-glx")
 os.system("apt install ghostscript python3-tk")
 
 import streamlit as st
-<<<<<<< HEAD
-import base64
-from pathlib import Path
-import tempfile
-import os
-#os.system("apt install ghostscript python3-tk")
-##
-
-def show_pdf(file):
-    with open(file,"wb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-    
-    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="800" height="800" type="application/pdf"></iframe>'
-    st.markdown(pdf_display, unsafe_allow_html=True)
-=======
 # @st.cache
 # def gh():
 #     """install ghostscript on the linux machine"""
->>>>>>> 778c10e63ae452fd246b6dc2c0e06b1f42a9d4f3
     
 #     proc = subprocess.Popen('apt-get update', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
 #     proc = subprocess.Popen('apt-get install sudo', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
@@ -38,20 +22,6 @@ def show_pdf(file):
 import pandas as pd 
 import camelot as cam # extracting tables from PDFs 
 
-<<<<<<< HEAD
-# to run this only once and it's cached
-@st.cache
-def gh():
-    """install ghostscript on the linux machine"""
-    proc = subprocess.Popen('apt-get install -y ghostscript', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
-    proc.wait()
-
-#gh()
-
-
-
-=======
->>>>>>> 778c10e63ae452fd246b6dc2c0e06b1f42a9d4f3
 st.title("PDF Table Extractor")
 
 input_pdf = st.file_uploader(label = "", type = 'pdf')
