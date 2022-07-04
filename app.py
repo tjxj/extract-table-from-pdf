@@ -1,62 +1,14 @@
 #-*- coding : utf-8-*-
-import os,subprocess,base64
-from subprocess import STDOUT #os process manipuation
-os.system("apt-get update")
-os.system("apt-get install sudo")
-os.system("sudo apt update")
-os.system("apt-get install -y libgl1-mesa-glx")
-os.system("apt install ghostscript python3-tk")
-
-import streamlit as st
-<<<<<<< HEAD
 import base64
-from pathlib import Path
-import tempfile
-import os
-#os.system("apt install ghostscript python3-tk")
-##
-
-def show_pdf(file):
-    with open(file,"wb") as f:
-        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-    
-    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="800" height="800" type="application/pdf"></iframe>'
-    st.markdown(pdf_display, unsafe_allow_html=True)
-=======
-# @st.cache
-# def gh():
-#     """install ghostscript on the linux machine"""
->>>>>>> 778c10e63ae452fd246b6dc2c0e06b1f42a9d4f3
-    
-#     proc = subprocess.Popen('apt-get update', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
-#     proc = subprocess.Popen('apt-get install sudo', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
-#     proc = subprocess.Popen('sudo apt update', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
-#     proc = subprocess.Popen('apt install ghostscript python3-tk', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
-#     proc = subprocess.Popen('apt-get install -y libgl1-mesa-glx', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
-#     proc.wait()
-# gh()
+from subprocess import STDOUT 
+import streamlit as st
 import pandas as pd 
 import camelot as cam # extracting tables from PDFs 
 
-<<<<<<< HEAD
-# to run this only once and it's cached
-@st.cache
-def gh():
-    """install ghostscript on the linux machine"""
-    proc = subprocess.Popen('apt-get install -y ghostscript', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
-    proc.wait()
-
-#gh()
-
-
-
-=======
->>>>>>> 778c10e63ae452fd246b6dc2c0e06b1f42a9d4f3
 st.title("PDF Table Extractor")
-
 input_pdf = st.file_uploader(label = "", type = 'pdf')
-
-page_number = st.text_input("请填写表格所在PDF页码，eg: 3", value = 1)
+background = st.selectbox("表格线条是否透明",(False,True))
+page_number = st.text_input("请填写表格所在PDF页码，eg: 3, 1-3, 2-end, all", value = 1)
 
 if input_pdf is not None:
     # byte object into a PDF file 
@@ -64,18 +16,12 @@ if input_pdf is not None:
         base64_pdf = base64.b64encode(input_pdf.read()).decode('utf-8')
         f.write(base64.b64decode(base64_pdf))
     f.close()
-
-    # read the pdf and parse it using stream
-    tables = cam.read_pdf("input.pdf", pages=page_number)
-    result = pd.ExcelWriter('result.xlsx', engine='xlsxwriter') 
-    tables[0].to_excel(result,index=False) 
-    # for i in range(0,len(tables)):
-    #     table = tables[i].df
-    #     sheetname = str(i)
-    #     table.to_excel(result, sheetname,index=False) 
-
-    with open('result.xlsx','rb') as f:
-       st.download_button('提取完成，点击下载！', f,file_name='result.xlsx',mime="application/vnd.ms-excel")
-       
-       
-
+    tables_all= cam.read_pdf("input.pdf", pages=page_number, process_background=background)
+    result_all = pd.ExcelWriter("result.xlsx", engine='xlsxwriter') 
+    for i in range(0,len(tables_all)):
+        table = tables_all[i].df
+        sheetname = str(i)
+        table.to_excel(result_all, sheetname,index=False) 
+    result_all.save()
+    with open(result_all,'rb') as f:
+       st.download_button('抽取完成, 点击下载！', f,file_name="result.xlsx",mime="application/vnd.ms-excel")
